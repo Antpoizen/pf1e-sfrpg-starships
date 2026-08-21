@@ -1,5 +1,10 @@
 # PF1e SFRPG Starships
 
+## Version 1.0.1
+
+This patch removes the optional SFRPG package recommendation from `module.json` because Foundry VTT v12 can fail remote installation when a module manifest recommends a non-active system package. SFRPG is still detected at runtime by the importer when it is installed locally.
+
+
 **PF1e SFRPG Starships** adds Starfinder-style starship data, hull points, shield facings, starship actions, starship components, and token overlays to a Pathfinder 1e world.
 
 This module targets exactly:
@@ -38,7 +43,7 @@ This preserves PF1e compatibility while behaving like a new Starship actor workf
 
 ## What it does not automate
 
-Version 1.0.0 does not fully automate Starfinder starship combat phases, crew role action economy, gunnery resolution, shield quadrant targeting, or component critical damage rules. Actions are available as manual chat cards and data entries.
+Version 1.0.1 does not fully automate Starfinder starship combat phases, crew role action economy, gunnery resolution, shield quadrant targeting, or component critical damage rules. Actions are available as manual chat cards and data entries.
 
 ## Starship data storage
 
@@ -119,14 +124,14 @@ Paste a JSON object or array that contains starship data. The importer uses flex
 Create a GitHub release tagged:
 
 ```text
-1.0.0
+1.0.1
 ```
 
 Upload these assets:
 
 ```text
 module.json
-PF1e-SFRPG-Starships-v1.0.0.zip
+PF1e-SFRPG-Starships-v1.0.1.zip
 ```
 
 Use this manifest URL in Foundry:
@@ -176,7 +181,7 @@ await api.addAction(actor, {
 - This module does not add a true PF1e actor document type because doing so safely would require system-level schema support.
 - Direct SFRPG pack access may not work inside a PF1e world if Foundry does not expose inactive system packs through `game.packs`.
 - Imported SFRPG data is normalized with flexible heuristics because SFRPG document structures may vary by version and content source.
-- Full Starfinder starship combat automation is intentionally out of scope for v1.0.0.
+- Full Starfinder starship combat automation is intentionally out of scope for v1.0.1.
 - The overlay is rendered on the canvas token layer and may need style adjustments if another module heavily modifies token rendering.
 
 ## Testing checklist

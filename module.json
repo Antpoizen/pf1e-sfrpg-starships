@@ -2,7 +2,7 @@
   "id": "pf1e-sfrpg-starships",
   "title": "PF1e SFRPG Starships",
   "description": "Adds Starfinder-style starship actors, shield facings, hull overlays, starship actions, and SFRPG import tools to PF1e worlds.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Matthew Liss"
@@ -10,7 +10,7 @@
   ],
   "url": "https://github.com/Antpoizen/pf1e-sfrpg-starships",
   "manifest": "https://github.com/Antpoizen/pf1e-sfrpg-starships/releases/latest/download/module.json",
-  "download": "https://github.com/Antpoizen/pf1e-sfrpg-starships/releases/download/1.0.0/PF1e-SFRPG-Starships-v1.0.0.zip",
+  "download": "https://github.com/Antpoizen/pf1e-sfrpg-starships/releases/download/1.0.1/PF1e-SFRPG-Starships-v1.0.1.zip",
   "compatibility": {
     "minimum": "12",
     "verified": "12.331",
@@ -25,16 +25,6 @@
           "minimum": "11.11",
           "verified": "11.11",
           "maximum": "11.11"
-        }
-      }
-    ],
-    "recommends": [
-      {
-        "id": "sfrpg",
-        "type": "system",
-        "compatibility": {
-          "minimum": "0.27.3",
-          "verified": "0.27.3"
         }
       }
     ]
