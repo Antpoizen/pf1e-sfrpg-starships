@@ -1,0 +1,156 @@
+<form class="pf1e-sfrpg-starship-form" autocomplete="off">
+  <header class="starship-header">
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="header-fields">
+      <h1>{{actor.name}}</h1>
+      <div class="header-grid">
+        <label>
+          <span>{{localize "PF1ESFRPGStarships.Tier"}}</span>
+          <input type="number" name="stats.tier" value="{{starship.stats.tier}}" {{#unless isGM}}readonly{{/unless}} />
+        </label>
+        <label>
+          <span>{{localize "PF1ESFRPGStarships.Size"}}</span>
+          <input type="text" name="stats.size" value="{{starship.stats.size}}" {{#unless isGM}}readonly{{/unless}} />
+        </label>
+        <label>
+          <span>{{localize "PF1ESFRPGStarships.Frame"}}</span>
+          <input type="text" name="stats.frame" value="{{starship.stats.frame}}" {{#unless isGM}}readonly{{/unless}} />
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" data-group="primary">
+    <a class="item" data-tab="overview"><i class="fas fa-gauge-high"></i> {{localize "PF1ESFRPGStarships.TabOverview"}}</a>
+    <a class="item" data-tab="components"><i class="fas fa-cogs"></i> {{localize "PF1ESFRPGStarships.TabComponents"}}</a>
+    <a class="item" data-tab="actions"><i class="fas fa-dice-d20"></i> {{localize "PF1ESFRPGStarships.TabActions"}}</a>
+    <a class="item" data-tab="crew"><i class="fas fa-users"></i> {{localize "PF1ESFRPGStarships.TabCrew"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab" data-tab="overview" data-group="primary">
+      <section class="panel hull-panel">
+        <h2>{{localize "PF1ESFRPGStarships.Hull"}}</h2>
+        <div class="resource-grid two">
+          <label>
+            <span>{{localize "PF1ESFRPGStarships.Current"}}</span>
+            <input type="number" name="hull.value" value="{{starship.hull.value}}" {{#unless canEditHull}}readonly{{/unless}} />
+          </label>
+          <label>
+            <span>{{localize "PF1ESFRPGStarships.Maximum"}}</span>
+            <input type="number" name="hull.max" value="{{starship.hull.max}}" {{#unless canEditHull}}readonly{{/unless}} />
+          </label>
+        </div>
+      </section>
+
+      <section class="panel shield-panel">
+        <h2>{{localize "PF1ESFRPGStarships.Shields"}}</h2>
+        <div class="shield-grid">
+          {{#each facings}}
+          <fieldset>
+            <legend>{{this.label}}</legend>
+            <label>
+              <span>{{localize "PF1ESFRPGStarships.Current"}}</span>
+              <input type="number" name="shields.{{this.key}}.value" value="{{this.shield.value}}" {{#unless ../canEditShields}}readonly{{/unless}} />
+            </label>
+            <label>
+              <span>{{localize "PF1ESFRPGStarships.Maximum"}}</span>
+              <input type="number" name="shields.{{this.key}}.max" value="{{this.shield.max}}" {{#unless ../canEditShields}}readonly{{/unless}} />
+            </label>
+          </fieldset>
+          {{/each}}
+        </div>
+        <button type="button" data-action="reset-shields"><i class="fas fa-rotate"></i> {{localize "PF1ESFRPGStarships.ResetShields"}}</button>
+      </section>
+
+      <section class="panel stats-panel">
+        <h2>{{localize "PF1ESFRPGStarships.BasicStats"}}</h2>
+        <div class="resource-grid three">
+          <label><span>{{localize "PF1ESFRPGStarships.Speed"}}</span><input type="number" name="stats.speed" value="{{starship.stats.speed}}" {{#unless isGM}}readonly{{/unless}} /></label>
+          <label><span>{{localize "PF1ESFRPGStarships.Maneuverability"}}</span><input type="text" name="stats.maneuverability" value="{{starship.stats.maneuverability}}" {{#unless isGM}}readonly{{/unless}} /></label>
+          <label><span>{{localize "PF1ESFRPGStarships.ArmorClass"}}</span><input type="number" name="stats.armorClass" value="{{starship.stats.armorClass}}" {{#unless isGM}}readonly{{/unless}} /></label>
+          <label><span>{{localize "PF1ESFRPGStarships.TargetLock"}}</span><input type="number" name="stats.targetLock" value="{{starship.stats.targetLock}}" {{#unless isGM}}readonly{{/unless}} /></label>
+          <label><span>{{localize "PF1ESFRPGStarships.DamageThreshold"}}</span><input type="number" name="stats.damageThreshold" value="{{starship.stats.damageThreshold}}" {{#unless isGM}}readonly{{/unless}} /></label>
+          <label><span>{{localize "PF1ESFRPGStarships.CriticalThreshold"}}</span><input type="number" name="stats.criticalThreshold" value="{{starship.stats.criticalThreshold}}" {{#unless isGM}}readonly{{/unless}} /></label>
+        </div>
+      </section>
+    </div>
+
+    <div class="tab" data-tab="components" data-group="primary">
+      <section class="panel">
+        <h2>{{localize "PF1ESFRPGStarships.Components"}}</h2>
+        {{#if canEditComponents}}<button type="button" data-action="add-component"><i class="fas fa-plus"></i> {{localize "PF1ESFRPGStarships.AddComponent"}}</button>{{/if}}
+        <div class="table-like components-table">
+          <div class="table-header">
+            <span>{{localize "PF1ESFRPGStarships.Name"}}</span><span>{{localize "PF1ESFRPGStarships.Type"}}</span><span>{{localize "PF1ESFRPGStarships.BP"}}</span><span>{{localize "PF1ESFRPGStarships.PCU"}}</span><span>{{localize "PF1ESFRPGStarships.Status"}}</span><span></span>
+          </div>
+          {{#each starship.components}}
+          <div class="table-row">
+            <input type="hidden" name="components.{{@index}}.id" value="{{this.id}}" />
+            <input type="text" name="components.{{@index}}.name" value="{{this.name}}" {{#unless ../canEditComponents}}readonly{{/unless}} />
+            <select name="components.{{@index}}.type" {{#unless ../canEditComponents}}disabled{{/unless}}>
+              {{selectOptions ../componentTypes selected=this.type localize=false}}
+            </select>
+            <input type="number" name="components.{{@index}}.bp" value="{{this.bp}}" {{#unless ../canEditComponents}}readonly{{/unless}} />
+            <input type="number" name="components.{{@index}}.pcu" value="{{this.pcu}}" {{#unless ../canEditComponents}}readonly{{/unless}} />
+            <input type="text" name="components.{{@index}}.status" value="{{this.status}}" {{#unless ../canEditComponents}}readonly{{/unless}} />
+            {{#if ../canEditComponents}}<button type="button" data-action="delete-component" data-id="{{this.id}}"><i class="fas fa-trash"></i></button>{{/if}}
+            <textarea name="components.{{@index}}.description" {{#unless ../canEditComponents}}readonly{{/unless}}>{{this.description}}</textarea>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+    </div>
+
+    <div class="tab" data-tab="actions" data-group="primary">
+      <section class="panel">
+        <h2>{{localize "PF1ESFRPGStarships.Actions"}}</h2>
+        {{#if isGM}}<button type="button" data-action="add-action"><i class="fas fa-plus"></i> {{localize "PF1ESFRPGStarships.AddAction"}}</button>{{/if}}
+        <div class="table-like actions-table">
+          <div class="table-header">
+            <span>{{localize "PF1ESFRPGStarships.Name"}}</span><span>{{localize "PF1ESFRPGStarships.Phase"}}</span><span>{{localize "PF1ESFRPGStarships.CrewRole"}}</span><span>{{localize "PF1ESFRPGStarships.Skill"}}</span><span>{{localize "PF1ESFRPGStarships.DC"}}</span><span></span>
+          </div>
+          {{#each starship.actions}}
+          <div class="table-row action-row">
+            <input type="hidden" name="actions.{{@index}}.id" value="{{this.id}}" />
+            <input type="text" name="actions.{{@index}}.name" value="{{this.name}}" {{#unless ../isGM}}readonly{{/unless}} />
+            <select name="actions.{{@index}}.phase" {{#unless ../isGM}}disabled{{/unless}}>{{selectOptions ../actionPhases selected=this.phase localize=false}}</select>
+            <input type="text" name="actions.{{@index}}.crewRole" value="{{this.crewRole}}" {{#unless ../isGM}}readonly{{/unless}} />
+            <input type="text" name="actions.{{@index}}.skill" value="{{this.skill}}" {{#unless ../isGM}}readonly{{/unless}} />
+            <input type="text" name="actions.{{@index}}.dc" value="{{this.dc}}" {{#unless ../isGM}}readonly{{/unless}} />
+            <div class="row-actions">
+              {{#if ../canUseActions}}<button type="button" data-action="post-action" data-id="{{this.id}}"><i class="fas fa-comment"></i></button>{{/if}}
+              {{#if ../isGM}}<button type="button" data-action="delete-action" data-id="{{this.id}}"><i class="fas fa-trash"></i></button>{{/if}}
+            </div>
+            <textarea name="actions.{{@index}}.description" {{#unless ../isGM}}readonly{{/unless}}>{{this.description}}</textarea>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+    </div>
+
+    <div class="tab" data-tab="crew" data-group="primary">
+      <section class="panel">
+        <h2>{{localize "PF1ESFRPGStarships.Crew"}}</h2>
+        {{#if canEditCrew}}<button type="button" data-action="add-crew"><i class="fas fa-user-plus"></i> {{localize "PF1ESFRPGStarships.AddCrew"}}</button>{{/if}}
+        <div class="table-like crew-table">
+          <div class="table-header"><span>{{localize "PF1ESFRPGStarships.Role"}}</span><span>{{localize "PF1ESFRPGStarships.Name"}}</span><span>{{localize "PF1ESFRPGStarships.ActorUuid"}}</span><span></span></div>
+          {{#each starship.crew}}
+          <div class="table-row">
+            <input type="hidden" name="crew.{{@index}}.id" value="{{this.id}}" />
+            <input type="text" name="crew.{{@index}}.role" value="{{this.role}}" {{#unless ../canEditCrew}}readonly{{/unless}} />
+            <input type="text" name="crew.{{@index}}.name" value="{{this.name}}" {{#unless ../canEditCrew}}readonly{{/unless}} />
+            <input type="text" name="crew.{{@index}}.actorUuid" value="{{this.actorUuid}}" {{#unless ../canEditCrew}}readonly{{/unless}} />
+            {{#if ../canEditCrew}}<button type="button" data-action="delete-crew" data-id="{{this.id}}"><i class="fas fa-trash"></i></button>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <footer class="sheet-footer flexrow">
+    <button type="submit"><i class="fas fa-save"></i> {{localize "PF1ESFRPGStarships.Save"}}</button>
+    <button type="button" data-action="refresh-overlay"><i class="fas fa-sync"></i> {{localize "PF1ESFRPGStarships.RefreshOverlay"}}</button>
+  </footer>
+</form>

@@ -1,0 +1,38 @@
+<form class="pf1e-sfrpg-starship-gm-tools" autocomplete="off">
+  <section class="panel">
+    <h2><i class="fas fa-rocket"></i> {{localize "PF1ESFRPGStarships.GMToolsTitle"}}</h2>
+    <p>{{localize "PF1ESFRPGStarships.GMToolsIntro"}}</p>
+    <div class="status-grid">
+      <span>{{localize "PF1ESFRPGStarships.SelectedActor"}}</span>
+      <strong>{{#if selected}}{{selected.name}}{{else}}{{localize "PF1ESFRPGStarships.None"}}{{/if}}</strong>
+      <span>{{localize "PF1ESFRPGStarships.SelectedIsStarship"}}</span>
+      <strong>{{#if selectedIsStarship}}{{localize "PF1ESFRPGStarships.Yes"}}{{else}}{{localize "PF1ESFRPGStarships.No"}}{{/if}}</strong>
+    </div>
+  </section>
+
+  <section class="panel tool-grid">
+    <button type="button" data-action="create"><i class="fas fa-plus"></i> {{localize "PF1ESFRPGStarships.CreateStarshipActor"}}</button>
+    <button type="button" data-action="mark"><i class="fas fa-satellite"></i> {{localize "PF1ESFRPGStarships.MarkSelectedStarship"}}</button>
+    <button type="button" data-action="unmark"><i class="fas fa-ban"></i> {{localize "PF1ESFRPGStarships.RemoveStarshipFlag"}}</button>
+    <button type="button" data-action="open"><i class="fas fa-rocket"></i> {{localize "PF1ESFRPGStarships.OpenStarshipSheet"}}</button>
+    <button type="button" data-action="importer"><i class="fas fa-file-import"></i> {{localize "PF1ESFRPGStarships.OpenImporter"}}</button>
+    <button type="button" data-action="export"><i class="fas fa-file-export"></i> {{localize "PF1ESFRPGStarships.ExportStarship"}}</button>
+    <button type="button" data-action="refresh-overlays"><i class="fas fa-sync"></i> {{localize "PF1ESFRPGStarships.RefreshOverlays"}}</button>
+    <button type="button" data-action="clear-overlays"><i class="fas fa-broom"></i> {{localize "PF1ESFRPGStarships.ClearOverlays"}}</button>
+    <button type="button" data-action="validate"><i class="fas fa-check"></i> {{localize "PF1ESFRPGStarships.ValidateData"}}</button>
+    <button type="button" data-action="repair"><i class="fas fa-wrench"></i> {{localize "PF1ESFRPGStarships.RepairSelected"}}</button>
+    <button type="button" data-action="reset-shields"><i class="fas fa-shield-alt"></i> {{localize "PF1ESFRPGStarships.ResetSelectedShields"}}</button>
+    <button type="button" data-action="reset-hull"><i class="fas fa-heart"></i> {{localize "PF1ESFRPGStarships.ResetSelectedHull"}}</button>
+  </section>
+
+  <section class="panel">
+    <h3>{{localize "PF1ESFRPGStarships.KnownStarships"}}</h3>
+    <ul>
+      {{#each starships}}
+      <li>{{this.name}}</li>
+      {{else}}
+      <li>{{localize "PF1ESFRPGStarships.NoStarshipsYet"}}</li>
+      {{/each}}
+    </ul>
+  </section>
+</form>

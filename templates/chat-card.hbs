@@ -1,0 +1,14 @@
+<div class="pf1e-sfrpg-starships-chat-card">
+  <h3>{{title}}</h3>
+  {{#if payload.rows}}
+  <dl>
+    {{#each payload.rows}}
+    <dt>{{this.label}}</dt>
+    <dd>{{this.value}}</dd>
+    {{/each}}
+  </dl>
+  {{/if}}
+  {{#if payload.description}}
+  <div class="description">{{{payload.description}}}</div>
+  {{/if}}
+</div>

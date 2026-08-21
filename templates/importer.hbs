@@ -1,0 +1,47 @@
+<form class="pf1e-sfrpg-starship-importer" autocomplete="off">
+  <section class="panel">
+    <h2><i class="fas fa-file-import"></i> {{localize "PF1ESFRPGStarships.ImporterTitle"}}</h2>
+    <p>{{localize "PF1ESFRPGStarships.ImporterIntro"}}</p>
+    <div class="status-grid">
+      <span>{{localize "PF1ESFRPGStarships.SfrpgInstalled"}}</span>
+      <strong>{{#if sfrpgInstalled}}{{localize "PF1ESFRPGStarships.Yes"}}{{else}}{{localize "PF1ESFRPGStarships.No"}}{{/if}}</strong>
+      <span>{{localize "PF1ESFRPGStarships.AccessiblePacks"}}</span>
+      <strong>{{packs.length}}</strong>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>{{localize "PF1ESFRPGStarships.DirectImport"}}</h3>
+    {{#if directImportEnabled}}
+    <label>
+      <span>{{localize "PF1ESFRPGStarships.Pack"}}</span>
+      <select name="packId">
+        {{#each packs}}
+        <option value="{{this.id}}">{{this.label}} — {{this.id}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>
+      <span>{{localize "PF1ESFRPGStarships.DocumentId"}}</span>
+      <input type="text" name="documentId" placeholder="{{localize 'PF1ESFRPGStarships.DocumentIdHint'}}" />
+    </label>
+    <button type="button" data-action="import-pack-entry"><i class="fas fa-download"></i> {{localize "PF1ESFRPGStarships.ImportPackEntry"}}</button>
+    <p class="hint">{{localize "PF1ESFRPGStarships.DirectImportHint"}}</p>
+    {{else}}
+    <p class="hint warning">{{localize "PF1ESFRPGStarships.DirectImportDisabled"}}</p>
+    {{/if}}
+  </section>
+
+  <section class="panel">
+    <h3>{{localize "PF1ESFRPGStarships.JsonImport"}}</h3>
+    {{#if jsonImportEnabled}}
+    <textarea name="jsonImport" placeholder="{{localize 'PF1ESFRPGStarships.JsonImportPlaceholder'}}"></textarea>
+    <div class="button-row">
+      <button type="button" data-action="import-json"><i class="fas fa-file-import"></i> {{localize "PF1ESFRPGStarships.ImportJson"}}</button>
+      <button type="button" data-action="paste-example"><i class="fas fa-vial"></i> {{localize "PF1ESFRPGStarships.PasteExample"}}</button>
+    </div>
+    {{else}}
+    <p class="hint warning">{{localize "PF1ESFRPGStarships.JsonImportDisabled"}}</p>
+    {{/if}}
+  </section>
+</form>
